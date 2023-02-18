@@ -1,33 +1,49 @@
-import { useState } from 'react'
-import '../styles/App.css'
 
-function App() {
-  const [count, setCount] = useState(0)
+import { useState, useEffect } from "react"
+import User from "./User";
 
-  return (
-    <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="./images/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src="./images/react.svg" className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </div>
-  )
+export default function App (){
+    const [users, setUsers]= useState([]);
+    const [loading, setLoading]= useState(true);
+    useEffect(()=>{
+        //promise
+        window.fetch('https://dummyjson.com/users')
+        .then(data=>data.json())
+        .then(data=>setUsers(data.users))
+        .catch(error=>console.log(error))
+        .finally(()=>setLoading(false));
+//async / await
+       /*  const getData= async()=>{
+            try{
+            const request = await window.fetch('https://dummyjson.com/users');
+            const response= await request.json();
+            setUsers(response.users);
+            }catch(error){
+                console.log(error);
+            }finally{
+                setLoading(false)
+            }
+        };
+        getData() */
+    },[]);
+    
+    return(
+        <section className="container text-white py-4">
+            <h1>App</h1>
+            {loading && <p>...loading</p>}
+             {!loading && (
+                    <div className="row gy-4">
+                    {users.length !==0 && 
+                    users.map(user=>(
+                        <div key={user.id} className="col-12 col-sm-6 col-md-3">
+                            <User  {...user}/>
+                        </div>
+
+                    ))}
+                    {users.length ===0 && <p>No hay usuarios</p>}
+                    </div>
+                )}
+        </section>
+
+    );
 }
-
-export default App
