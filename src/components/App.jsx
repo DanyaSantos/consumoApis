@@ -7,8 +7,9 @@ export default function App (){
     data:{users}, 
     loading,
 }=useFetch('https://dummyjson.com/users')
+
     return(
-        <section className="container text-white py-4">
+          <section className="container text-white py-4">
             <h1>App</h1>
             {loading && <Loading />}
              {!loading && (
@@ -23,7 +24,6 @@ export default function App (){
                     {users.length ===0 && <p>No hay usuarios</p>}
                     </div>
                 )}
-        </section>
-
+         </section>
     );
 }
