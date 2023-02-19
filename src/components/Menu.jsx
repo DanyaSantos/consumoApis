@@ -8,6 +8,7 @@ export const  Menu=()=>{
             <Link className="nav-link" to="/about">About</Link>
             <Link className="nav-link" to="/portfolio">Portfolio</Link>
             <Link className="nav-link" to="/contact">Contact</Link>
+            <Link className="nav-link" to="/user">User</Link>
             <a target="_blank" className="nav-link" href="https://google.com">Google</a>
         </nav>
         </section>
