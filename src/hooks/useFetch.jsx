@@ -13,6 +13,7 @@ export const useFetch=(url)=>{
  return{
     data,
     loading,
+    setData
  };
 };
 
