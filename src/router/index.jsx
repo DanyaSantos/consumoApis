@@ -11,7 +11,7 @@ export default function Paths(){
             <Route path="/about" element={<h2>About</h2>}/>
             <Route path="/portfolio" element={<h2>Portfolio</h2>}/>
             <Route path="/contact" element={<h2>Contact</h2>}/>
-            <Route path="/user" element={<UserDetail />} />
+            <Route path="/user/:idUser" element={<UserDetail />} />
         </Routes>
         </>
     )

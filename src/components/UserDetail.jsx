@@ -1,18 +1,27 @@
 import { useFetch } from "../hooks/useFetch"
+import Loading from "./Loading"
+import { useParams } from "react-router-dom"
 
 export const UserDetail=()=>{
- const {data : user,loading}=  useFetch('http://dummyjson.com/users/1')
+const {idUser} = useParams()
+ const {data : user,loading}=  useFetch(`http://dummyjson.com/users/${idUser}`)
     return(
-        <section className="container text-white">
-            <div className="row">
-                <section className="col-md-6" >
-                    <p>Username</p>
-                    <img src="" alt="Photo" />
-                </section>
-                <section className="col-md-6">
-                    <p>firstName lastName</p>
+        <section className="container">
+             {loading && <Loading  />}
+             {!loading && (
+                    
+            <div className="row justify-content-center">
+                <section className="col-sm-4" >
+                    <article className="card">
+                        <img className="card-img-top" src={user.image} alt={user.username} />
+                        <div className="card-body">
+                            <p>{user.username}</p>
+                            <p>{user.firstName} {user.lastName}</p>
+                       </div>
+                    </article>
                 </section>
             </div>
+                )}
         </section>
     )
 
